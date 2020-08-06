@@ -13,8 +13,8 @@ const { findOne } = require('../../models/User');
 router.post(
   '/',
   [
-    check('name', 'Name is required').not().isEmpty,
-    check('email', 'Please enter a valid email').isEmail,
+    check('name', 'Name is required').not().isEmpty(),
+    check('email', 'Please enter a valid email').isEmail(),
     check(
       'password',
       'Your password must contain atleast 8 characters'
