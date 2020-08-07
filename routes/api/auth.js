@@ -4,6 +4,7 @@ const auth = require('../../middleware/auth');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcryptjs');
+const { check, validationResult } = require('express-validator');
 
 // @route  GET api/auth
 // @desc   Test Route
@@ -56,7 +57,7 @@ router.post(
         payload,
         config.get('jwtSecret'),
         {
-          expiresIn: 360000,
+          expiresIn: '5 days',
         },
         (err, token) => {
           if (err) throw err;
