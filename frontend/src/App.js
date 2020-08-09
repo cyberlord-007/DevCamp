@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/layout/Navbar';
@@ -10,16 +10,15 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <Fragment>
           <Navbar />
           <Route exact path='/' component={Landing}></Route>
-        </div>
-        <section className='container'>
+
           <Switch>
             <Route exact path='/register' component={Register}></Route>
             <Route exact path='/login' component={Login}></Route>
           </Switch>
-        </section>
+        </Fragment>
       </BrowserRouter>
     );
   }
