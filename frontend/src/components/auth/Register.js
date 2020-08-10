@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 const Register = () => {
   // state hook
 
@@ -20,7 +22,7 @@ const Register = () => {
     if (password !== cnfPassword) {
       console.log('Passwords do not match');
     } else {
-      console.log('Registration successful');
+      console.log(inputData);
     }
   };
 
@@ -77,7 +79,7 @@ const Register = () => {
           <input type='submit' className='btn btn-primary' value='Register' />
         </form>
         <p className='my-1'>
-          Already have an account? <a href='login.html'>Sign In</a>
+          Already have an account? <Link to='/login'>Sign In</Link>
         </p>
       </section>
     </Fragment>
