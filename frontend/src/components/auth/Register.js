@@ -1,6 +1,29 @@
 import React, { Fragment } from 'react';
-
+import { useState } from 'react';
 const Register = () => {
+  // state hook
+
+  const [inputData, setInputData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    cnfPassword: '',
+  });
+
+  const { name, email, password, cnfPassword } = inputData;
+
+  const handleChange = (e) =>
+    setInputData({ ...inputData, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (password !== cnfPassword) {
+      console.log('Passwords do not match');
+    } else {
+      console.log('Registration successful');
+    }
+  };
+
   return (
     <Fragment>
       <section className='container'>
@@ -8,27 +31,47 @@ const Register = () => {
         <p className='lead'>
           <i className='fas fa-user'></i> Create Your Account
         </p>
-        <form className='form' action='create-profile.html'>
+        <form className='form' onSubmit={handleSubmit}>
           <div className='form-group'>
-            <input type='text' placeholder='Name' name='name' required />
+            <input
+              type='text'
+              placeholder='Name'
+              name='name'
+              value={name}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className='form-group'>
-            <input type='email' placeholder='Email Address' name='email' />
+            <input
+              type='email'
+              placeholder='Email Address'
+              name='email'
+              value={email}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className='form-group'>
             <input
               type='password'
               placeholder='Password'
               name='password'
-              minLength='6'
+              value={password}
+              onChange={handleChange}
+              minLength='8'
+              required
             />
           </div>
           <div className='form-group'>
             <input
               type='password'
               placeholder='Confirm Password'
-              name='password2'
-              minLength='6'
+              name='cnfPassword'
+              value={cnfPassword}
+              onChange={handleChange}
+              minLength='8'
+              required
             />
           </div>
           <input type='submit' className='btn btn-primary' value='Register' />
