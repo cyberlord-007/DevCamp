@@ -1,8 +1,15 @@
-import { REG_SUCCESS, REG_FAIL } from '../actions/actionTypes';
+import {
+  REG_SUCCESS,
+  REG_FAIL,
+  LOADED_USER,
+  AUTH_ERROR,
+} from '../actions/actionTypes';
 import { setAlert } from './alert';
+import setAuthToken from '../utilities/setAuthToken';
 // for requesting to our api
 import axios from 'axios';
 
+// user registration
 export const registerUser = ({ name, email, password }) => async (dispatch) => {
   const config = {
     headers: {
@@ -27,6 +34,26 @@ export const registerUser = ({ name, email, password }) => async (dispatch) => {
     }
     dispatch({
       type: REG_FAIL,
+    });
+  }
+};
+
+// load user
+
+export const loadUser = () => async (dispatch) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+
+  try {
+    const res = await axios.get('/api/auth');
+    dispatch({
+      type: LOADED_USER,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
     });
   }
 };
