@@ -1,4 +1,4 @@
-import { SET_ALERT, REMOVE_ALERT } from './constants';
+import { SET_ALERT, REMOVE_ALERT } from './actionTypes';
 import uuid from 'uuid';
 export const setAlert = (msg, alertType) => (dispatch) => {
   const id = uuid.v4();

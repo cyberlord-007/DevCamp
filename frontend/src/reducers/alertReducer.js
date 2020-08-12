@@ -1,4 +1,4 @@
-import { SET_ALERT, REMOVE_ALERT } from '../actions/constants';
+import { SET_ALERT, REMOVE_ALERT } from '../actions/actionTypes';
 
 const initState = [];
 

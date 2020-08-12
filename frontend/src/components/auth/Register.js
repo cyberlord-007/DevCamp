@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
+import { registerUser } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
 const Register = (props) => {
@@ -25,7 +26,7 @@ const Register = (props) => {
     if (password !== cnfPassword) {
       props.setAlert('Passwords do not match', 'danger');
     } else {
-      console.log(inputData);
+      props.registerUser({ name, email, password });
     }
   };
 
@@ -54,7 +55,6 @@ const Register = (props) => {
               name='email'
               value={email}
               onChange={handleChange}
-              required
             />
           </div>
           <div className='form-group'>
@@ -64,8 +64,6 @@ const Register = (props) => {
               name='password'
               value={password}
               onChange={handleChange}
-              minLength='8'
-              required
             />
           </div>
           <div className='form-group'>
@@ -75,8 +73,6 @@ const Register = (props) => {
               name='cnfPassword'
               value={cnfPassword}
               onChange={handleChange}
-              minLength='8'
-              required
             />
           </div>
           <input type='submit' className='btn btn-primary' value='Register' />
@@ -91,6 +87,7 @@ const Register = (props) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, registerUser })(Register);
