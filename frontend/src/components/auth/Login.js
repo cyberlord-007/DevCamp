@@ -1,8 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/auth';
+import { setAlert } from '../../actions/alert';
+import PropTypes from 'prop-types';
 
-const Login = () => {
+const Login = ({ loginUser }) => {
   // use state hook
   const [inputData, setInputData] = useState({
     email: '',
@@ -16,12 +20,11 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Success');
+    loginUser({ email, password });
   };
 
   return (
     <section className='container'>
-      <div className='alert alert-danger'>Invalid credentials</div>
       <h1 className='large text-primary'>Sign In</h1>
       <p className='lead'>
         <i className='fas fa-user'></i> Sign into Your Account
@@ -54,4 +57,9 @@ const Login = () => {
     </section>
   );
 };
-export default Login;
+
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+};
+
+export default connect(null, { setAlert, loginUser })(Login);

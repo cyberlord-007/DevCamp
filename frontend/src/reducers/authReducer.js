@@ -3,6 +3,8 @@ import {
   REG_FAIL,
   LOADED_USER,
   AUTH_ERROR,
+  LOGGED_IN,
+  LOGIN_FAIL,
 } from '../actions/actionTypes';
 
 const initState = {
@@ -16,6 +18,7 @@ export default function (state = initState, action) {
   const { type, payload } = action;
   switch (type) {
     case REG_SUCCESS:
+    case LOGGED_IN:
       localStorage.setItem('token', payload.token);
       return {
         ...state,
@@ -24,6 +27,8 @@ export default function (state = initState, action) {
         loading: false,
       };
     case REG_FAIL:
+    case AUTH_ERROR:
+    case LOGIN_FAIL:
       localStorage.removeItem('token');
       return {
         ...state,
@@ -37,14 +42,6 @@ export default function (state = initState, action) {
         isAuthenticated: true,
         loading: false,
         user: payload,
-      };
-    case AUTH_ERROR:
-      localStorage.removeItem('token');
-      return {
-        ...state,
-        token: null,
-        isAuthenticated: false,
-        loading: false,
       };
     default:
       return state;
