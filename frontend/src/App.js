@@ -7,6 +7,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import { Provider } from 'react-redux';
 import Store from './store';
+import Alert from './components/layout/Alert';
 
 class App extends Component {
   render() {
@@ -16,11 +17,13 @@ class App extends Component {
           <Fragment>
             <Navbar />
             <Route exact path='/' component={Landing}></Route>
-
-            <Switch>
-              <Route exact path='/register' component={Register}></Route>
-              <Route exact path='/login' component={Login}></Route>
-            </Switch>
+            <section className='container'>
+              <Alert />
+              <Switch>
+                <Route exact path='/register' component={Register}></Route>
+                <Route exact path='/login' component={Login}></Route>
+              </Switch>
+            </section>
           </Fragment>
         </BrowserRouter>
       </Provider>

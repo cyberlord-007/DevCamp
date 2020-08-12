@@ -1,8 +1,11 @@
 import React, { Fragment } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alert';
+import PropTypes from 'prop-types';
 
-const Register = () => {
+const Register = (props) => {
   // state hook
 
   const [inputData, setInputData] = useState({
@@ -20,7 +23,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password !== cnfPassword) {
-      console.log('Passwords do not match');
+      props.setAlert('Passwords do not match', 'danger');
     } else {
       console.log(inputData);
     }
@@ -86,4 +89,8 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+};
+
+export default connect(null, { setAlert })(Register);
