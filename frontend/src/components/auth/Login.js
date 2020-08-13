@@ -6,7 +6,7 @@ import { loginUser } from '../../actions/auth';
 import { setAlert } from '../../actions/alert';
 import PropTypes from 'prop-types';
 
-const Login = ({ loginUser }) => {
+const Login = ({ loginUser, isAuthenticated }) => {
   // use state hook
   const [inputData, setInputData] = useState({
     email: '',
@@ -22,6 +22,12 @@ const Login = ({ loginUser }) => {
     e.preventDefault();
     loginUser({ email, password });
   };
+
+  // redirect user to dashboard
+
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard'></Redirect>;
+  }
 
   return (
     <section className='container'>
@@ -62,4 +68,8 @@ Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setAlert, loginUser })(Login);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.authReducer.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, loginUser })(Login);

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { registerUser } from '../../actions/auth';
@@ -29,6 +29,10 @@ const Register = (props) => {
       props.registerUser({ name, email, password });
     }
   };
+
+  if (props.isAuthenticated) {
+    return <Redirect to='/dashboard'></Redirect>;
+  }
 
   return (
     <Fragment>
@@ -90,4 +94,8 @@ Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setAlert, registerUser })(Register);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.authReducer.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, registerUser })(Register);
