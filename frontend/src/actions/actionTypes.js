@@ -7,3 +7,5 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGGED_IN = 'LOGGED_IN';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
+export const FETCH_PROFILE = 'FETCH_PROFILE';
+export const PROFILE_ERROR = 'PROFILE_ERROR';
