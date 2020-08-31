@@ -1,14 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfile } from '../../actions/profile';
+import Spinner from '../layout/Spinner';
 
-const Dashboard = ({ getProfile, auth, profile }) => {
+const Dashboard = ({ getProfile, auth, profile: { profile, loading } }) => {
   useEffect(() => {
     getProfile();
   }, []);
 
-  return <div>Dashboard</div>;
+  return loading && profile == null ? (
+    <Spinner />
+  ) : (
+    <Fragment>Dashboard</Fragment>
+  );
 };
 
 Dashboard.propTypes = {
