@@ -12,6 +12,7 @@ import Alert from './components/layout/Alert';
 import setAuthToken from './utilities/setAuthToken';
 import { loadUser } from './actions/auth';
 import ProtectedRoute from './components/routes/ProtectedRoute';
+import CreateProfile from './components/profile-form/CreateProfile';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -37,6 +38,11 @@ const App = () => {
                 exact
                 path='/dashboard'
                 component={Dashboard}
+              ></ProtectedRoute>
+              <ProtectedRoute
+                exact
+                path='/create-profile'
+                component={CreateProfile}
               ></ProtectedRoute>
             </Switch>
           </section>
